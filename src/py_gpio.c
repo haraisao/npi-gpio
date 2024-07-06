@@ -46,10 +46,10 @@ static PyObject *py_unsetup_gpio(PyObject *self, PyObject *args) {
 
 static PyMethodDef methods[] = {
   { "gen_port", py_gen_port, METH_VARARGS, "gen_port"},
-  { "setup_gpio", py_setup_gpio, METH_VARARGS, "setup port"},
-  { "unsetup_gpio", py_unsetup_gpio, METH_VARARGS, "unsetup port"},
-  { "read_gpio", py_read_gpio, METH_VARARGS, "digital in"},
-  { "write_gpio", py_write_gpio, METH_VARARGS, "digital out"},
+  { "setup", py_setup_gpio, METH_VARARGS, "setup port"},
+  { "shutdown", py_unsetup_gpio, METH_VARARGS, "unsetup port"},
+  { "input", py_read_gpio, METH_VARARGS, "digital in"},
+  { "output", py_write_gpio, METH_VARARGS, "digital out"},
   { NULL, NULL, NULL, 0, NULL},
 };
 
