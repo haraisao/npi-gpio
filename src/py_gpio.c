@@ -12,9 +12,44 @@ static PyObject *py_gen_port(PyObject *self, PyObject *args) {
   return Py_BuildValue("s", gen_port(buf));
 }
 
+static PyObject *py_write_gpio(PyObject *self, PyObject *args) {
+  int pin, val;
+  if (!PyArg_ParseTuple(args, "ii", &pin, &val) ){
+    return NULL;
+  }
+  return Py_BuildValue("i", write_gpio_port(pin, val));
+}
+
+static PyObject *py_read_gpio(PyObject *self, PyObject *args) {
+  int pin;
+  if (!PyArg_ParseTuple(args, "i", &pin) ){
+    return NULL;
+  }
+  return Py_BuildValue("i", read_gpio_port(pin));
+}
+
+static PyObject *py_setup_gpio(PyObject *self, PyObject *args) {
+  int pin, dir;
+  if (!PyArg_ParseTuple(args, "ii", &pin, &dir) ){
+    return NULL;
+  }
+  return Py_BuildValue("i", setup_gpio_port(pin, dir));
+}
+
+static PyObject *py_unsetup_gpio(PyObject *self, PyObject *args) {
+  int pin;
+  if (!PyArg_ParseTuple(args, "i", &pin) ){
+    return NULL;
+  }
+  return Py_BuildValue("i", unsetup_gpio_port(pin));
+}
 
 static PyMethodDef methods[] = {
   { "gen_port", py_gen_port, METH_VARARGS, "gen_port"},
+  { "setup_gpio", py_setup_gpio, METH_VARARGS, "setup port"},
+  { "unsetup_gpio", py_unsetup_gpio, METH_VARARGS, "unsetup port"},
+  { "read_gpio", py_read_gpio, METH_VARARGS, "digital in"},
+  { "write_gpio", py_write_gpio, METH_VARARGS, "digital out"},
   { NULL, NULL, NULL, 0, NULL},
 };
 
